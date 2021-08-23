@@ -17,11 +17,11 @@ public class Article {
     private String title;
     private String content;
 
-    @Field(type = FieldType.Date)
-    private Date log_date;
-
-    @Field(type = FieldType.Text)
-    private String longtype_text;
+//    @Field(type = FieldType.Date)
+//    private Date log_date;
+//
+//    @Field(type = FieldType.Text)
+//    private String longtype_text;
 
     @Field(type = FieldType.Long)
     private Long price;
