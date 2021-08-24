@@ -1,15 +1,15 @@
 package com.ventulus.elasticsearchproject.model;
 
 import lombok.Data;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.*;
 
 import javax.persistence.Id;
 import java.util.Date;
 
 @Document(indexName = "article")
 @Data
+@Setting(settingPath = "/settings/setting.json")
+@Mapping(mappingPath = "/settings/mapping.json")
 public class Article {
 
     @Id
