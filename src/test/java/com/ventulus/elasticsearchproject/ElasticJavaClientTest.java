@@ -1,6 +1,7 @@
 package com.ventulus.elasticsearchproject;
 
 
+import com.ventulus.elasticsearchproject.config.ElasticRestClientConfig;
 import com.ventulus.elasticsearchproject.model.Article;
 import com.ventulus.elasticsearchproject.model.ArticleRepository;
 import org.apache.http.HttpHost;
@@ -9,7 +10,6 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -22,23 +22,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-@SpringBootTest
+@SpringBootTest(classes = {ElasticRestClientConfig.class})
 public class ElasticJavaClientTest {
 
-    private static RestHighLevelClient client;
     @Autowired
-    private ArticleRepository articleRepository;
-
-    @BeforeAll
-    public static void initclient(){
-        client = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200, "http")));
-    }
+    private RestHighLevelClient client;
 
     @Test
+    @Disabled
     @DisplayName("엘라스틱에 재대로 전달되는지?")
     public void elastic_transfer(){
         for (int i = 0; i <5; i++) {
@@ -47,7 +39,6 @@ public class ElasticJavaClientTest {
             article.setPrice(12134L);
             article.setContent("이럴수가! 크렇게 쉬울수가?");
             article.setTitle("엘라스틱서치가 이렇게 쉽다며?");
-            articleRepository.save(article);
         }
     }
 
